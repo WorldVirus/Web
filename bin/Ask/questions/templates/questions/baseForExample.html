@@ -1,0 +1,36 @@
+{% load staticfiles %}
+    <html>
+        <head>
+            <title>Django blog</title>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        </head>
+         <body>
+        <div class="page-header">
+            <h1><a href="/">Django Blog</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                  {% block content %}
+         <form method="post">{% csrf_token %}
+    <label>Post</label>
+
+    <input type="text" name="name">
+    <input type="submit" value="Go">
+      {{ form.as_p }}
+    </form>
+    </br>
+    <form method="get">{% csrf_token %}
+    <label>Get</label>
+    <input type="text" name="name">
+    <input type="submit" value="Go">{{ form.as_p }}
+    </form>
+    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>

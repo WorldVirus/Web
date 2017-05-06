@@ -1,0 +1,138 @@
+{% extends "questions/_base.html" %}
+{%load staticfiles%}
+
+
+{%block head %}
+
+  <div align="center">
+<FONT SIZE="5">
+    <FONT FACE="Comic Sans MS" style="color:Yellow">DR.Bart</FONT>
+</FONT>
+</br>
+
+</br>
+  <a href={%url 'ask'%} type="button"  style="font-size:130%" class="btn btn-small btn-primary">ASK</a>
+
+</div>
+
+
+{%endblock%}
+
+{%block content%}
+
+<div class="col-md-7 ">
+  <div class="well well-lg" style="font-size:160%">
+<div class="middle">
+  <div class="container">
+    <main class="content">
+
+      <FONT SIZE="4">
+            <FONT FACE="Comic Sans MS">New Questions</FONT>
+          </br>
+<div class="brd">
+
+
+<img src="/homer.jpeg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
+<a href="#" class="btn btn.link" style="font-size:100%" >Where is my bear?</a>
+</br>
+<button type="button" class="btn btn-default" aria-label="Left Align">
+<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+</button>
+
+<a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
+<a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
+<p> Text here.... </p>
+</div>
+
+</div>
+</div>
+</main>
+</div>
+
+<div>
+<hr align="center" width="750" size="50" color="Red" />
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="col-md-7 ">
+<div class="well well-sm "style="font-size:70%">
+<div class="middle">
+<div class="container">
+<main class="content">
+
+  <FONT SIZE="4">
+        <FONT FACE="Comic Sans MS">New Answers</FONT>
+      </br>
+<div class="brd">
+
+
+<img src="/bob.jpg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
+
+</br>
+<button type="button" class="btn btn-default" aria-label="Left Align">
+<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+</button>
+<a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
+<a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
+<p> Text here.... </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</br>
+
+</div>
+{%endblock%}
+{%block footer%}
+
+<div align="center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      {% if pagination_list.has_previous %}
+              <li><a href="?page={{ pagination_list.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+              <li><a>&laquo;</a></li>
+          {% endif %}
+          {% for page in pagination_list.paginator.page_range %}
+              {% if page == pagination_list.number %}
+                  <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
+              {% else %}
+                  <li><a href="?page={{ page }}">{{ page }}</a></li>
+              {% endif %}
+          {% endfor %}
+          {% if pagination_list.has_next %}
+              <li><a href="?page={{ pagination_list.next_page_number }}">&raquo;</a></li>
+          {% else %}
+              <li><a>&raquo;</a></li>
+          {% endif %}
+    </ul>
+  </nav>
+
+</div>
+{%endblock%}

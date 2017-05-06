@@ -1,0 +1,100 @@
+{% extends "questions/_base.html" %}
+{%load staticfiles%}
+
+{%block set%}
+<a href="{% url 'registration' %}"style="font-size:120%"class="btn btn.link">registration</a>
+<a href="{%url 'login'%}" style="font-size:120%"class="btn btn.link">log in</a>
+
+{%endblock%}
+{%block content%}
+<div class="row">
+
+
+ <div class="col-md-5 col-md-push-1">
+  <form>
+    <div class="form-group has-error has-feedback">
+        <label for="exampleInputEmail1">Login:</label>
+    <label class="control-label" for="inputError2">Sorry,this login is busy</label>
+    <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    <span id="inputError2Status" class="sr-only">(error)</span>
+  </div>
+
+    </br>
+    <div class="form-group has-error has-feedback">
+        <label for="exampleInputEmail1">Email:</label>
+    <label class="control-label" for="inputError2">Sorry,this e-mail is busy</label>
+    <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    <span id="inputError2Status" class="sr-only">(error)</span>
+  </div>
+
+    </br>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Nickname</label>
+      <input type="login"  width="20%" height="10%" class="form-control" id="exampleInputLogin1" >
+    </div>
+  </br>
+
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input type="password"  width="20%" height="10%" class="form-control" id="inputPassword" >
+  </div>
+  </br>
+
+  <div class="form-group">
+    <label for="inputPassword">Repeat Password</label>
+    <input type="password"  width="20%" height="10%" class="form-control" id="inputPassword" >
+  </div>
+  </br>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+
+  </div>
+  </br>
+
+  <button type="submit" style="font-size:120%"class="btn btn-default">Register</button>
+  </form>
+</div>
+
+
+
+
+
+   <div class="col-md-4 col-md-push-4">
+
+<div class="list-group">
+<a href="#" class="list-group-item active">
+  Popular Tags
+</a>
+<a href="#" class="list-group-item">1</a>
+<a href="#" class="list-group-item">2</a>
+<a href="#" class="list-group-item">3</a>
+<a href="#" class="list-group-item">4</a>
+<a href="#" class="list-group-item">5</a>
+
+</div>
+
+
+
+
+<div class="list-group">
+<a href="#" class="list-group-item active">
+  Best Members
+</a>
+<a href="#" class="list-group-item">1</a>
+<a href="#" class="list-group-item">2</a>
+<a href="#" class="list-group-item">3</a>
+<a href="#" class="list-group-item">4</a>
+<a href="#" class="list-group-item">5</a>
+
+</div>
+</div>
+</div>
+
+{%endblock%}
+{%block tags%}
+
+{%endblock%}
