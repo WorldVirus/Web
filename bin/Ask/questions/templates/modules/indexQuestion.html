@@ -1,0 +1,29 @@
+<div class="col-md-7 ">
+   <div class="well well-lg">
+      <div class="middle">
+         <div class="container">
+            <main class="content">
+               <FONT SIZE="4">
+               <FONT FACE="Comic Sans MS">New Questions: {{question.header}}</FONT>
+               </br>
+               <div class="brd">
+                  <img src="/homer.jpeg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
+                  <a href="{%url 'best_answer'%}" class="btn btn.link" style="font-size:100%" >Where is my beer? {{question.rating}}
+                  </a>
+                  </br>
+                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-default" aria-label="Left Align">
+                  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                  </button>
+                  <a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
+                  <a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
+                  <p> {{question.question_text}} </p>
+               </div>
+            </main>
+         </div>
+      </div>
+   </div>
+</div>
+{%include "modules/tags.html"%}

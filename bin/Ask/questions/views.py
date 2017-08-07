@@ -1,23 +1,17 @@
 from django.http import HttpResponse,HttpResponseNotFound, Http404
-#from django.http import QueryDict
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
-from questions.models import User,Question,TagForQuestion,Answer
+from questions.models import UserProfile,Question,TagForQuestion,Answer,Tag,Like
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response
+from questions.forms import UserForm,QuestionForm
+from django.contrib.auth.models import User
+from django.contrib import auth
+import json
+import datetime
 
-"""
-def post_list(request):
-    return render(request, 'questions/post_list.html', {})
-
-    ZACOMENCHENNAY FUNKCIY
-def post_list(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        return render(request, 'questions/post_detail.html' , {'form': form})
-    else:
-        form = PostForm()
-        return render(request, 'questions/post_detail.html', {'form': form})
-"""
 def tag_question(request):
     return render(request, 'questions/tag_question.html', {})
 
@@ -26,25 +20,63 @@ def best_answer(request):
 
 def answer(request):
     return render(request,'questions/answer.html',{})
-def index(request):
-    return render(request, 'questions/index.html', {})
 
 def settings(request):
     return render(request, 'questions/settings.html',{})
 
+def signup(request):
+    if request.POST:
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid():
+           form.save()
+           form.save_image()
+           return HttpResponseRedirect(reverse('index'))
+        else:
+            return render(request, 'questions/signup.html',{'form':form})
+    else:
+        form = UserForm()
+    return render(request, 'questions/signup.html',{'form':form})
+
 def login(request):
-    return render(request, 'questions/login.html',{})
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('/')
+        else:
+            return render(request,'questions/login.html',{'login_error':True})
+    else:
+        return render(request,'questions/login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 
 def registration(request):
     return render(request, 'questions/registration.html',{})
 
+
 def ask(request):
-    return render(request, 'questions/ask.html',{})
+    if request.user.is_authenticated:
+        if request.POST:
+            form = QuestionForm(request.POST)
+            if form.is_valid():
+                question = form.save()
+                return redirect('/')
+        else:
+            form= QuestionForm()
+    else:
+        return render(request,'questions/pageError.html')
+    return render(request, 'questions/ask.html',{'form':form})
 
 def question(request):
     return render(request, 'questions/question.html',{})
 
-
+def base(request):
+    return render(request, 'questions/base.html',{})
 
 
 def pagination_my(request, iterable, page_size=30):
@@ -66,34 +98,26 @@ def newest_list_page_view(request, *args, **kwargs):
         'obj_list': pagination_my(request, articles),
     })
 
-def paginate_lection(request, qs):
-    try:
-        limit = int(request.GET.get('limit', 5))
-    except ValueError:
-        limit = 5
-    if limit > 100:
-        limit = 10
-    try:
-        page = int(request.GET.get('page', 1))
-    except ValueError:
-        raise Http404
-    paginator = Paginator(qs, limit)
-    try:
-        page = paginator.page(page)
-    except EmptyPage:
-        page = paginator.page(paginator.num_pages)
-    return page
-"""
-def index(request):
-        return render(request, 'questions/index.html', {'Question':questions.objects()})
 
+def index(request,page_number=1):
+    all_questions=Question.objects.all()
+    current_page = Paginator(all_questions,2)
+    return render(request,'questions/index.html',{'questions':current_page.page(page_number)})
 
-def index (request):
-    context['question'] = pager.page(page).object_list
-    context['pager'] = pager
-    context['tags'] = Question.objects.all().values('id', 'tag__tag_text')
-    context['popular_tags'] = Tag.objects.all().values('tag_text').annotate(Count("question")).order_by('-question__count')[0:5]
-    context['best_users'] = User.objects.all().order_by('-profile__rating')[0:5]
-    return render(req, 'index.html', context)
+def like(request):
+    q_id = request.POST['q_id']
+    user = request.user
+    try:
+        question = Question.objects.get(request.POST.get('q_id'))
+        Like.objects.create(user=request.user,question=question).count()
+        return HttpResponse(json.dumps({
+            'status':'ok',
+            'likes':len(question.vote_set),
+        }),content_type='application/json'
+        )
+    except:
+        return HttpResponse(json.dump({
+            'status':'error',
 
-"""
+        }),content_type='application/json'
+        )

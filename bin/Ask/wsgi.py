@@ -1,66 +1,20 @@
-
 ##gunicorn -b 127.0.0.1:8081 wsgi:app
 
-import cgi
-
-form = b'''
-    <html>
-    <head>
-    <title>Hello User!</title>
-    </head>
-    <body>
-    <p>Hello,word :)
-    </br>
-    <form method="post">
-    <label>Post</label>
-    <input type="text" name="name">
-    <input type="submit" value="Go">
-    </form>
-    </br>
-    <form method="get">
-    <label>Get</label>
-    <input type="text" name="name">
-    <input type="submit" value="Go">
-    </form>
-
-    </body>
-    </html>
-    '''
-
-def app(environ, start_response):
-    html = form
-    
-    if environ['REQUEST_METHOD'] == 'POST':
-        post_env = environ.copy()
-        post_env['QUERY_STRING'] = ''
-        post = cgi.FieldStorage(
-                                fp=environ['wsgi.input'],
-                                environ=post_env,
-                                keep_blank_values=True
-                                )
-        html = b'Post ' + post['name'].value + '!'
-    
-    start_response('200 OK', [('Content-Type', 'text/html')])
-    return [html]
-
-    if environ['REQUEST_METHOD'] == 'GET':
-        get_env = environ.copy()
-        get_env['QUERY_STRING'] = ''
-        get = cgi.FieldStorage(
-                                fp=environ['wsgi.input'],
-                                environ=get_env,
-                                keep_blank_values=True
-                                )
-        html = b'Get ' + get['name'].value + '!'
-    
-    start_response('200 OK', [('Content-Type', 'text/html')])
-    return [html]
-
-if __name__ == '__main__':
+def simple_app(environ, start_response):
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/html')]
+    start_response(status, response_headers)
+    str = "<html><body>"
+    str += "<form action=\"\" method=\"post\">"
+    str += "<input name=\"search\" type=\"text\" class=\"form-control\" placeholder=\"Search\">"
+    str += "<input type=\"submit\" value=\"Ask!\">"
+    str += "</form>"
+    str += "<p>Hello world!</p>"
+    str += "<p>GET: " + environ["QUERY_STRING"] + '</p>'
     try:
-        from wsgiref.simple_server import make_server
-        httpd = make_server('', 8080, app)
-        print('Serving on port 8080...')
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print('Goodbye.')
+        size = int(environ.get('CONTENT_LENGTH', 0))
+    except (ValueError):
+        size = 0
+    str += "<p>POST: " + environ["wsgi.input"].read(size) + '</p>'
+    str += "</body></html>";
+    return [str]

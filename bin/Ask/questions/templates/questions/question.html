@@ -1,211 +1,29 @@
-{% extends "questions/_base.html" %}
+{% extends "questions/base.html" %}
 {%load staticfiles%}
-
+{%block head %}
+{%include "modules/header.html"%}
+{%endblock%}
 {%block content%}
-
-    <div class="col-md-7 ">
-  <div class="well well-lg" style="font-size:160%">
-<div class="middle">
-  <div class="container">
-    <main class="content">
-
-      <FONT SIZE="4">
-            <FONT FACE="Comic Sans MS">New Questions</FONT>
-          </br>
-<div class="brd">
-
-
-<img src="homer.jpeg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
-<a href="#" class="btn btn.link" style="font-size:100%" >Where is my bear?</a>
+<link href="/my_style.css" rel="stylesheet">
+{%include "modules/indexQuestion.html"%}
+{%endblock%}
+{%block tags%}
+{%endblock%}
+{%block footer%}
 </br>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-</button>
-
-<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-</button>
-
-<a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
-<a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
-<p> Text here.... </p>
-</div>
-
-</div>
-</div>
-</main>
-</div>
-
-<div>
-<hr align="center" width="750" size="50" color="Red" />
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<aside class="right-sidebar">
-<div align="right">
-
-
-<div class="list-group">
-<a href="#" class="list-group-item active">
-  Popular Tags
-</a>
-<a href="#" class="list-group-item">1</a>
-<a href="#" class="list-group-item">2</a>
-<a href="#" class="list-group-item">3</a>
-<a href="#" class="list-group-item">4</a>
-<a href="#" class="list-group-item">5</a>
-
-</div>
-
-
-</div>
-</aside>
-
-
-
-<div class="col-md-7 ">
-<div class="well well-sm "style="font-size:70%">
-<div class="middle">
-<div class="container">
-<main class="content">
-
-  <FONT SIZE="4">
-        <FONT FACE="Comic Sans MS">New Answers</FONT>
-      </br>
-<div class="brd">
-
-
-<img src="bob.jpg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
-
-</br>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-</button>
-
-<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-</button>
-<a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
-<a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
-<p> Text here.... </p>
-</div>
-</div>
-</div>
-</main>
-</div>
-</div>
-</div>
-
-
-<aside class="right-sidebar">
-<div align="right">
-
-<div class="list-group">
-<a href="#" class="list-group-item active">
-Best Members
-</a>
-<a href="#" class="list-group-item">1</a>
-<a href="#" class="list-group-item">2</a>
-<a href="#" class="list-group-item">3</a>
-<a href="#" class="list-group-item">4</a>
-<a href="#" class="list-group-item">5</a>
-
-</div>
-
-</div>
-
-
-</div>
-</aside>
-
-
-
-
-<div class="col-md-7 ">
-<div class="well well-sm "style="font-size:70%">
-<div class="middle">
-<div class="container">
-<main class="content">
-
-  <FONT SIZE="4">
-        <FONT FACE="Comic Sans MS">New Answers</FONT>
-      </br>
-<div class="brd">
-
-
-<img src="anonym.jpg"  border="100px" width="15%" height="10%"   vspace="5" hspace="20">
-
-</br>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-</button>
-
-<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-</button>
-<a href="#" class="btn btn.link" style="font-size:80%" >tags</a>
-<a href="#" class="btn btn.link" style="font-size:80%" >answers 3</a>
-<p> Text here.... </p>
-
-
-
-
-
-
-</div>
-</div>
-</div>
-</main>
-</div>
-
-</br>
-</br>
-
-
-
-</div>
-
-</br>
-</br>
-</br>
-
-</br>
-</br>
-
-
-</div>
-
-
-
-
-
-</div>
-</div>
-</div>
-
-</br>
-</br>
-</br>
-</br>
-
 <div class="col-md-7">
-
-<textarea name="Answer"class="form-control" rows="5" cols="90" placeholder="Please,enter text here" maxlength="240" wrap></textarea>
-</br>
-
-<button type="submit" class="btn btn-default">Submit</button>
-</br>
-</br>
+   <textarea name="Answer"class="form-control" rows="5" cols="90" placeholder="Please,enter text here" maxlength="240" wrap></textarea>
+   </br>
+   <button type="submit" class="btn btn-default">Submit</button>
+   </br>
+   </br>
 </div>
 </div>
-</main>
-</div>
-
-
+<style>
+   html { overflow-x:  hidden; }
+   div { height:; }
+</style>
+</br>
+</br>
+</br>
 {%endblock%}
